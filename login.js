@@ -1,9 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity} from 'react-native';
 import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg"
-import ButtonGradientRegister from './ButtonGradientRegister';
-import SelectorButton from './SelectorButton';
+import ButtonGradientLogin from './ButtonGradientLogin';
 
 const { width, height } = Dimensions.get('window')
 
@@ -14,6 +13,7 @@ export default function App() {
       <Svg
       width={500}
       height={324}
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <Path
@@ -58,39 +58,20 @@ export default function App() {
         <SvgTop/>
       </View>
       <View style={styles.container}>
-        <Text style={styles.titulo}>Create a new account</Text>
+        <Text style={styles.titulo}>Welcome</Text>
+        <Text style={styles.subTitle}>Sign In to your account</Text>
         <TextInput 
-          placeholder="Name"
+          placeholder="example@email.com"
           style={styles.textInput}
         />
         <TextInput 
-          placeholder="Lastname"
-          style={styles.textInput}
-        />
-        <TextInput 
-          placeholder="Age"
-          style={styles.textInput}
-        />
-        <TextInput 
-          placeholder="Example@email.com"
-          style={styles.textInput}
-        />
-        <TextInput 
-          placeholder="Password"
+          placeholder="password"
           style={styles.textInput}
           secureTextEntry={true}
         />
-        <TextInput 
-          placeholder="Phone Number"
-          style={styles.textInput}
-        />
-        <SelectorButton/>
-        <TextInput 
-          placeholder="Province"
-          style={styles.textInput}
-        />
-        <ButtonGradientRegister/>
-        <Text style={styles.forgotPassword}>Have an account? Sign in</Text>
+        <Text style={styles.forgotPassword}>Forgot your password?</Text>
+        <ButtonGradientLogin/>
+        <Text style={styles.forgotPassword}>Don't have an account?</Text>
         <StatusBar style="auto" />
       </View>
     </View>
@@ -104,7 +85,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    top: -270,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -114,12 +94,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titulo: {
-    fontSize: 38,
-    color: '#203545',
+    fontSize: 80,
+    color: '#34434D',
     fontWeight: 'bold',
   },
   subTitle: {
-    fontSize: 15,
+    fontSize: 20,
     color: 'gray',
   },
   textInput: {
@@ -132,9 +112,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   forgotPassword: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'gray',
     marginTop: 20
+  },
+  button: {
+
   },
   
 });
