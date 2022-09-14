@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Alert, Button, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import { AuthContext } from '../context/AuthContext';
+import { useForm } from '../hook/useForm';
 import { stylesApp } from '../theme/AppStyles';
 
 
 export default function LoginScreen( { navigation } ) {
 
+    const { email, password, onInputChange } = useForm({
+        email: '',
+        password: ''
+    })
+
     // console.log(props);
+    const { login } = useContext(AuthContext)
+
+    const onLogin = () => {
+
+        login({ email, password })
+
+        navigation.navigate('HomeLogged')
+    }
 
   return (
     <View style={styles.container}>
@@ -16,16 +31,32 @@ export default function LoginScreen( { navigation } ) {
       <TextInput
         style={styles.input}
         placeholder="Email" 
+        keyboardType='email-address'
+        autoCapitalize='none'
+        autoCorrect={false}
+
+        onChangeText={ (value) => onInputChange(value, 'email') }
+        value={ email }
+        onSubmitEditing={ onLogin}
+
        />
 
       <TextInput 
         style={styles.input} 
         placeholder="Password"
+        secureTextEntry={true}
+        autoCapitalize='none'
+        autoCorrect={false}
+
+        onChangeText={ (value) => onInputChange(value, 'password') }
+        value={ password }
+        onSubmitEditing={ onLogin}
+
       />
 
     <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('HomeLogged')}
+        onPress={ onLogin }
     >
         <Text style={styles.textButton}>Login</Text>
     </TouchableOpacity>
@@ -35,8 +66,6 @@ export default function LoginScreen( { navigation } ) {
         onPress={() => navigation.navigate('RegisterScreen')}
         color="#fff"
     />
-
-
 
     </View>
   )
