@@ -22,7 +22,12 @@ export default function RegisterScreen( { navigation } ) {
       })
     }, [])
 
+    
+
     const onRegister = () => {
+
+
+
 
     }
     

@@ -106,6 +106,11 @@ export const AuthProvider = ({children}) => {
           await AsyncStorage.removeItem('token')
         }
 
+    // TODO: hay que hacer lo del register
+    const register = async( { email, password } ) => {
+
+    }
+
 
   return (
     <AuthContext.Provider value={{
