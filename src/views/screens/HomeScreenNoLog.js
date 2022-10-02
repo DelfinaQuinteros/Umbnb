@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, StatusBar, Text,TextInput, FlatList, Dimensions, StyleSheet, Image, Pressable, ScrollView, } from 'react-native';
+import { SafeAreaView, View, Button, StatusBar, Text,TextInput, FlatList,Pressable,Dimensions, StyleSheet, Image, ScrollView} from 'react-native';
 import COLORS from '../../consts/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Fontisto } from "@expo/vector-icons";
@@ -9,49 +9,7 @@ const {width} = Dimensions.get('screen');
 
 
 const HomeScreenNoLog = ({navigation}) => {
-  const optionsList = [
-    {title: 'Rent a House', img: require('../../assets/house2.jpg')},
-  ];
-  const categoryList = ['Recommended'];
 
-  const ListCategories = () => {
-    const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
-    return (
-      <View style={style.categoryListContainer}>
-        {categoryList.map((category, index) => (
-          <Pressable
-            key={index}
-            onPress={() => setSelectedCategoryIndex(index)}>
-            <Text
-              style={[
-                style.categoryListText,
-                index == selectedCategoryIndex && style.activeCategoryListText,
-              ]}>
-              {category}
-            </Text>
-          </Pressable>
-        ))}
-      </View>
-    );
-  };
-
-  const ListOptions = () => {
-    return (
-      <View style={style.optionListsContainer}>
-        {optionsList.map((option, index) => (
-          <View style={style.optionsCard} key={index}>
-            {/* House image */}
-            <Image source={option.img} style={style.optionsCardImage} />
-
-            {/* Option title */}
-            <Text style={{marginTop: 10, fontSize: 18, fontWeight: 'bold'}}>
-              {option.title}
-            </Text>
-          </View>
-        ))}
-      </View>
-    );
-  };
 
   const Card = ({house}) => {
     return (
@@ -74,7 +32,7 @@ const HomeScreenNoLog = ({navigation}) => {
               </Text>
               <Text
                 style={{fontWeight: 'bold', color: COLORS.blue, fontSize: 16}}>
-                $1,500
+                ${house.price}/night
               </Text>
             </View>
 
@@ -111,16 +69,16 @@ const HomeScreenNoLog = ({navigation}) => {
       />
       {/* Header container */}
       <View style={style.header}>
-        <View>
-          <Text style={{color: COLORS.grey}}>Location</Text>
-          <Text style={{color: COLORS.dark, fontSize: 20, fontWeight: 'bold'}}>
-            Argentina
-          </Text>
-        </View>
-        <Image
-          style={style.profileImage}
-          source={require('../../assets/person.jpg')}
-        />
+        <Pressable
+           style={style.button}
+           onPress={() => alert('Esto nos tiene que llevar a la pantalla de login')}>
+           <Text style={style.buttonText}>Sign In</Text>
+        </Pressable>
+        <Pressable
+           style={style.button}
+           onPress={() => alert('Esto nos tiene que llevar a la pantalla de Register')}>
+           <Text style={style.buttonText}>Sign Up</Text>
+        </Pressable>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Input and sort button container */}
@@ -140,18 +98,10 @@ const HomeScreenNoLog = ({navigation}) => {
           </View>
         </View>
 
-        {/* Render list options */}
-        <ListOptions />
-
-        {/* Render categories */}
-        <ListCategories />
-
         {/* Render Card */}
         <FlatList
           snapToInterval={width - 20}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{paddingLeft: 20, paddingVertical: 20}}
-          horizontal
+          contentContainerStyle={{paddingLeft: 20, paddingVertical: 40}}
           data={houses}
           renderItem={({item}) => <Card house={item} />}
         />
@@ -162,20 +112,16 @@ const HomeScreenNoLog = ({navigation}) => {
 
 const style = StyleSheet.create({
   header: {
-    paddingVertical: 20,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    flex: 1,
+    justifyContent: 'flex-end',
   },
-  profileImage: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-  },
+
   searchInputContainer: {
     height: 50,
+    marginTop:75,
     backgroundColor: COLORS.light,
-    flex: 1,
+    flex: 3,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
@@ -184,6 +130,7 @@ const style = StyleSheet.create({
   sortBtn: {
     backgroundColor: COLORS.dark,
     height: 50,
+    marginTop:75,
     width: 50,
     borderRadius: 12,
     justifyContent: 'center',
@@ -205,9 +152,25 @@ const style = StyleSheet.create({
     borderRadius: 10,
     width: '100%',
   },
+
+  button: {
+    marginTop:20,
+    backgroundColor:COLORS.white,
+    borderRadius:5,
+    height:35,
+    width:85,
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center',
+    text:'#ffffff',
+  },
+  buttonText: {
+    fontSize: 16,
+  },
   optionListsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     marginTop: 20,
     paddingHorizontal: 20,
   },

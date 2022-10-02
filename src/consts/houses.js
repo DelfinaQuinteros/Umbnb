@@ -8,7 +8,7 @@ const houses = [
       persons_number: 8,
       image: require('../assets/house1.jpg'),
       review: 10,
-      price: 5000,
+      price: 500,
       interiors: [
         require('../assets/interior1.jpg'),
         require('../assets/interior2.jpg'),
@@ -40,7 +40,7 @@ const houses = [
         persons_number: 8,
         image: require('../assets/house1.jpg'),
         review: 10,
-        price: 5000,
+        price: 40,
         interiors: [
           require('../assets/interior1.jpg'),
           require('../assets/interior2.jpg'),
@@ -56,7 +56,7 @@ const houses = [
       persons_number: 8,
       image: require('../assets/house1.jpg'),
       review: 10,
-      price: 5000,
+      price: 24,
       interiors: [
         require('../assets/interior1.jpg'),
         require('../assets/interior2.jpg'),

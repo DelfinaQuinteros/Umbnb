@@ -10,7 +10,7 @@ const {width} = Dimensions.get('screen');
 
 const HomeScreenClient = ({navigation}) => {
   const optionsList = [
-    {title: 'Rent a House', img: require('../../assets/house2.jpg')},
+    {title: 'Rent a House', img: require('../../assets/house1.jpg')},
   ];
   const categoryList = ['Recommended'];
 
@@ -74,7 +74,7 @@ const HomeScreenClient = ({navigation}) => {
               </Text>
               <Text
                 style={{fontWeight: 'bold', color: COLORS.blue, fontSize: 16}}>
-                $1,500
+                ${house.price}/night
               </Text>
             </View>
 

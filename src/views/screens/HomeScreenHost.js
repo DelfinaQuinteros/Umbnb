@@ -10,7 +10,6 @@ const {width} = Dimensions.get('screen');
 const HomeScreenHost = ({navigation}) => {
   const optionsList = [
     {title: 'Create a Home ', img: require('../../assets/house4.jpg')},
-    {title: 'Rent a Home', img: require('../../assets/house2.jpg')},
   ];
   
   const categoryList = ['Recommended'];
@@ -74,7 +73,7 @@ const HomeScreenHost = ({navigation}) => {
               </Text>
               <Text
                 style={{fontWeight: 'bold', color: COLORS.blue, fontSize: 16}}>
-                $1,500
+                ${house.price}/night
               </Text>
             </View>
 
@@ -91,7 +90,7 @@ const HomeScreenHost = ({navigation}) => {
                 <Text style={style.facilityText}>2</Text>
               </View>
               <View style={style.facility}>
-              <Fontisto name="male" size={18} />
+                <Fontisto name="male" size={18} />
                 <Text style={style.facilityText}>2</Text>
               </View>
             </View>
@@ -131,7 +130,7 @@ const HomeScreenHost = ({navigation}) => {
           }}>
           <View style={style.searchInputContainer}>
             <Icon name="search" color={COLORS.grey} size={25} />
-            <TextInput placeholder="Search address, city, location" />
+            <TextInput placeholder="Search address, city, province" />
           </View>
 
           <View style={style.sortBtn}>
@@ -206,7 +205,7 @@ const style = StyleSheet.create({
   },
   optionListsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     marginTop: 20,
     paddingHorizontal: 20,
   },

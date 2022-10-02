@@ -1,8 +1,6 @@
-
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {ButtonTab} from './src/navegation/ButtonTab';
 import HomeScreenNoLog from './src/views/screens/HomeScreenNoLog';
 import DetailsScreen from './src/views/screens/DetailsScreen';
 
