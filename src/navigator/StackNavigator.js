@@ -27,7 +27,7 @@ export const StackNavigator = () => {
           elevation: 0,
           shadowColor: 'transparent',
         },
-        headerShown: true,
+        headerShown: false,
       }}
     >
 
