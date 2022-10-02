@@ -14,7 +14,7 @@ export const StackNavigator = () => {
   const { isAuthenticated } = useContext(AuthContext)
 
   // TODO: se bugueea cuando expira el token y pasa mucho tiempo se queda cargando siempre pero con un token viejo, no se va nunca el estado de checking
-  if (isAuthenticated === 'checking') return <LoadingScreen />
+  // if (isAuthenticated === 'checking') return <LoadingScreen />
   
   return (
     <Stack.Navigator
