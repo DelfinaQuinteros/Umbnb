@@ -3,10 +3,11 @@ import SwitchSelector from "react-native-switch-selector";
 import { StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import { Fontisto } from "@expo/vector-icons";
 
-export default function  SelectorButton () {
+export const SelectorButton = ({ onInputChange, value }) => {
     return (
         <TouchableOpacity style={styles.container}>
             <SwitchSelector 
+                // value={value}
                 initial={0}
                 // onPress={value => this.setState({ gender: value })}
                 textColor= "#1F2937"
