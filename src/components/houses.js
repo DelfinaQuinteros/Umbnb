@@ -1,3 +1,5 @@
+import { hola } from '../../assets/proof';
+
 const houses = [
     {
       id: '1',
@@ -6,13 +8,13 @@ const houses = [
       address: 'East Side Cedar Cottage Toronto',
       rooms_number: 4,
       persons_number: 8,
-      image: require('../assets/house1.jpg'),
+      image: require('../../assets/house1.jpeg'),
       review: 10,
       price: 500,
       interiors: [
-        require('../assets/interior1.jpg'),
-        require('../assets/interior2.jpg'),
-        require('../assets/interior3.jpg'),
+        require('../../assets/interior1.jpeg'),
+        require('../../assets/interior2.jpeg'),
+        require('../../assets/interior3.jpeg'),
       ],
     },
     {
@@ -22,13 +24,13 @@ const houses = [
       address: 'East Side Cedar Cottage Toronto',
       rooms_number: 4,
       persons_number: 8,
-      image: require('../assets/house1.jpg'),
+      image: require('../../assets/house1.jpeg'),
       review: 10,
       price: 5000,
       interiors: [
-        require('../assets/interior1.jpg'),
-        require('../assets/interior2.jpg'),
-        require('../assets/interior3.jpg'),
+        require('../../assets/interior1.jpeg'),
+        require('../../assets/interior2.jpeg'),
+        require('../../assets/interior3.jpeg'),
       ],
     },
     {
@@ -38,13 +40,13 @@ const houses = [
         address: 'East Side Cedar Cottage Toronto',
         rooms_number: 4,
         persons_number: 8,
-        image: require('../assets/house1.jpg'),
+        image: require('../../assets/house1.jpeg'),
         review: 10,
         price: 40,
         interiors: [
-          require('../assets/interior1.jpg'),
-          require('../assets/interior2.jpg'),
-          require('../assets/interior3.jpg'),
+          require('../../assets/interior1.jpeg'),
+          require('../../assets/interior2.jpeg'),
+          require('../../assets/interior3.jpeg'),
         ],
     },
     {
@@ -54,13 +56,13 @@ const houses = [
       address: 'East Side Cedar Cottage Toronto',
       rooms_number: 4,
       persons_number: 8,
-      image: require('../assets/house1.jpg'),
+      image: require('../../assets/house1.jpeg'),
       review: 10,
       price: 24,
       interiors: [
-        require('../assets/interior1.jpg'),
-        require('../assets/interior2.jpg'),
-        require('../assets/interior3.jpg'),
+        require('../../assets/interior1.jpeg'),
+        require('../../assets/interior2.jpeg'),
+        require('../../assets/interior3.jpeg'),
       ],
     },
   ];

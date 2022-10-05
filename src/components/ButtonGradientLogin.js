@@ -2,9 +2,12 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function  ButtonGradientLogin () {
+export default function  ButtonGradientLogin ({ onLogin }) {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity 
+            style={styles.container}
+            onPress={ onLogin }
+        >
             <LinearGradient
                 // Button Linear Gradient
                 colors={['#FFB677', '#FF3CBD']}

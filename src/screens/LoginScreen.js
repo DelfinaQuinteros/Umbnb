@@ -58,7 +58,7 @@ export default function LoginScreen( { navigation } ) {
 
             {/* <Text style={styles.forgotPassword}>Forgot your password?</Text> */}
 
-            <ButtonGradientLogin />
+            <ButtonGradientLogin onLogin={onLogin}/>
 
             <Button 
                 title="Don't have an account? Sign Up"
