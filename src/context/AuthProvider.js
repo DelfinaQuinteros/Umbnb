@@ -107,15 +107,52 @@ export const AuthProvider = ({children}) => {
         }
 
     // TODO: hay que hacer lo del register
-    const register = async( { email, password } ) => {
+    const register = async( { name, lastname, age, email, password, phone, sex, province } ) => {
+      try{
 
-    }
+        const resp = await umbnbApi.post(
+          '/register',
+          {
+            name,
+            lastname,
+            age,
+            email,
+            password,
+            phone,
+            sex,
+            province
+          }
+        )
+        const { access_token } = resp.data.data
+        const { id } = resp.data.data
+        // console.log(resp.data.data.access_token)
+        console.log(access_token);
+        console.log(id);
+
+        const action = {
+          type: types.register,
+          payload: {
+            token: access_token,
+            user: id
+          }
+        }
+        dispatch(action)
+        await AsyncStorage.setItem('token', access_token)
+
+      }catch(error){
+        console.log(error)
+        //TODO: mostrar error
+        Alert.alert('Error', 'Check the values')
+      }
+     }
+
 
 
   return (
     <AuthContext.Provider value={{
         ...authState,
         login: login,
+        register: register,
         logout: logout
     }}>
         { children }
