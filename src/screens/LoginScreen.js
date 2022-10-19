@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
-import { Alert, Button, Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import { Button, Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { useForm } from '../hook/useForm';
 import ButtonGradientLogin from '../components/ButtonGradientLogin';
@@ -63,7 +63,7 @@ export default function LoginScreen( { navigation } ) {
             <Button 
                 title="Don't have an account? Sign Up"
                 onPress={() => navigation.navigate('RegisterScreen')}
-                color="gray"
+                color="#203545"
             />
             {/* <Text style={styles.forgotPassword}>Don't have an account?</Text> */}
 

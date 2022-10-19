@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import { StatusBar } from 'expo-status-bar';
 import { Alert, Button, Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg"
@@ -23,21 +24,24 @@ export default function RegisterScreen( { navigation } ) {
       password: ''
     })
 
+
+
     useEffect(() => {
       navigation.setOptions({
         headerBackTitle: "Back"
       })
     }, [])
 
-    
-
+    console.log(props);
+    const {register} = useContext(AuthContext)
     const onRegister = () => {
 
+      register({ name, lastname, age, email, password, phone, sex, province })
+      navigation.navigate('HomeLogged')
     }
-    
 
   return (
-<View style={styles.mainContainer}>
+    <View style={styles.mainContainer}>
       <View style={styles.containerSVG}>
         <SvgTop/>
       </View>
@@ -92,7 +96,13 @@ export default function RegisterScreen( { navigation } ) {
           onSubmitEditing={ onRegister }
         />
 
-        <SelectorButton onInputChange value={ sex }/>
+        <TextInput 
+          style={styles.textInput}
+          placeholder="Sexo" 
+          onChangeText={ (value) => onInputChange(value, 'sex') }
+          value={ sex }
+          onSubmitEditing={ onRegister }
+        />
 
         <TextInput 
           style={styles.textInput}
@@ -103,13 +113,13 @@ export default function RegisterScreen( { navigation } ) {
         />
 
 
-        <ButtonGradientRegister />
+        <ButtonGradientRegister onRegister={onRegister} />
   
         {/* <Text style={styles.forgotPassword}>Have an account? Sign in</Text> */}
         <Button 
-            title="Don't have an account? Sign Up"
+            title="Do you have an account? Sign In"
             onPress={() => navigation.navigate('LoginScreen')}
-            color="gray"
+            color="#203545"
         />  
 
         <StatusBar style="auto" />

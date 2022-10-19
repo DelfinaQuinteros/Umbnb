@@ -31,50 +31,6 @@ export default function HomeLogged( { navigation } ) {
     navigation.navigate('LoginScreen')
   }
 
-  const optionsList = [
-    {title: 'Rent a House', img: require('../../assets/house1.jpeg')},
-  ];
-  const categoryList = ['Recommended'];
-
-  const ListCategories = () => {
-    const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
-    return (
-      <View style={style.categoryListContainer}>
-        {categoryList.map((category, index) => (
-          <Pressable
-            key={index}
-            onPress={() => setSelectedCategoryIndex(index)}>
-            <Text
-              style={[
-                style.categoryListText,
-                index == selectedCategoryIndex && style.activeCategoryListText,
-              ]}>
-              {category}
-            </Text>
-          </Pressable>
-        ))}
-      </View>
-    );
-  };
-
-  const ListOptions = () => {
-    return (
-      <View style={style.optionListsContainer}>
-        {optionsList.map((option, index) => (
-          <View style={style.optionsCard} key={index}>
-            {/* House image */}
-            <Image source={option.img} style={style.optionsCardImage} />
-
-            {/* Option title */}
-            <Text style={{marginTop: 10, fontSize: 18, fontWeight: 'bold'}}>
-              {option.title}
-            </Text>
-          </View>
-        ))}
-      </View>
-    );
-  };
-
   const Card = ({house}) => {
     return (
       <Pressable
@@ -109,7 +65,7 @@ export default function HomeLogged( { navigation } ) {
             {/* Facilities container */}
             <View style={{marginTop: 10, flexDirection: 'row'}}>
               <View style={style.facility}>
-                <Icon name="hotel" size={18} />
+                <Fontisto name="room" size={18} />
                 <Text style={style.facilityText}>4</Text>
               </View>
               <View style={style.facility}>
@@ -135,11 +91,16 @@ export default function HomeLogged( { navigation } ) {
       />
       {/* Header container */}
       <View style={style.header}>
-        <View>
-          <Text style={{color: COLORS.grey}}>Location</Text>
-          <Text style={{color: COLORS.dark, fontSize: 20, fontWeight: 'bold'}}>
-            Argentina
-          </Text>
+        <View style={{
+            paddingVertical: 10,
+            justifyContent: 'space-between',
+            paddingHorizontal: 10,
+          }}>
+        <Button
+          title="Logout"
+          onPress={ onLogout }
+          color="black"
+        />
         </View>
         <Image
           style={style.profileImage}
@@ -155,35 +116,23 @@ export default function HomeLogged( { navigation } ) {
             paddingHorizontal: 20,
           }}>
           <View style={style.searchInputContainer}>
-            <Icon name="search" color={COLORS.grey} size={25} />
+            <Fontisto name="search" color={COLORS.grey} size={25} />
             <TextInput placeholder="Search address, city, location" />
           </View>
 
           <View style={style.sortBtn}>
-            <Icon name="tune" color={COLORS.white} size={25} />
+            <Fontisto name="filter" color={COLORS.white} size={25} />
           </View>
         </View>
-
-        {/* Render list options */}
-        <ListOptions />
-
-        {/* Render categories */}
-        <ListCategories />
 
         {/* Render Card */}
         <FlatList
           snapToInterval={width - 20}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{paddingLeft: 20, paddingVertical: 20}}
-          horizontal
+          contentContainerStyle={{paddingLeft: 20, paddingVertical: 40}}
           data={houses}
           renderItem={({item}) => <Card house={item} />}
         />
-      <Button
-          title="Logout"
-          onPress={ onLogout }
-          color="black"
-      />
+
       </ScrollView>
     </SafeAreaView>
   )
