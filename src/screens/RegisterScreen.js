@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { StatusBar } from 'expo-status-bar';
-import { Alert, Button, Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import { Alert, Button, Dimensions, StyleSheet, Text, TextInput, ScrollView, View} from 'react-native';
 import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg"
 import { useForm } from '../hook/useForm';
 import { stylesApp } from '../theme/AppStyles';
@@ -32,7 +32,6 @@ export default function RegisterScreen( { navigation } ) {
       })
     }, [])
 
-    console.log(props);
     const {register} = useContext(AuthContext)
     const onRegister = () => {
 
@@ -41,12 +40,13 @@ export default function RegisterScreen( { navigation } ) {
     }
 
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.containerSVG}>
-        <SvgTop/>
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.titulo}>Create a new account</Text>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.mainContainer}>
+        <View style={styles.containerSVG}>
+          <SvgTop/>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.titulo}>Create a new account</Text>
 
 
         <TextInput 
@@ -124,7 +124,8 @@ export default function RegisterScreen( { navigation } ) {
 
         <StatusBar style="auto" />
       </View>
-    </View>
+      </View>
+    </ScrollView> 
   )
 
 }

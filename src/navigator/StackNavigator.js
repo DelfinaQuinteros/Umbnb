@@ -3,6 +3,7 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import React, { useContext } from 'react';
 import HomeLogged from '../screens/HomeLogged';
+import {DetailsScreen} from '../screens/DetailsScreen';
 
 import { AuthContext } from '../context/AuthContext';
 import { LoadingScreen } from '../screens/LoadingScreen';
@@ -44,6 +45,7 @@ export const StackNavigator = () => {
         : (
 
           <Stack.Screen name="HomeLogged" options={{ title:"Welcome" }} component={ HomeLogged } />
+
         )
         }
       {/* <Stack.Screen name="LoginScreen" options={{ title:"Login" }} component={ LoginScreen } />

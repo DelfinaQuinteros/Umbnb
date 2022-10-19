@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-
+import DetailsScreen from './DetailsScreen';
 // import { Alert, Button, Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
 import { SafeAreaView, View, StatusBar, Text,TextInput, FlatList, Dimensions, StyleSheet, Image, Pressable, ScrollView, Button, } from 'react-native';
 import { AuthContext } from '../context/AuthContext';

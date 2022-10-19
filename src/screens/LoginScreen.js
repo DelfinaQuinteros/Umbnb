@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
-import { Button, Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
+import { Button, Dimensions, StyleSheet, Text, TextInput, View, ScrollView} from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { useForm } from '../hook/useForm';
 import ButtonGradientLogin from '../components/ButtonGradientLogin';
@@ -26,6 +26,7 @@ export default function LoginScreen( { navigation } ) {
     }
 
   return (
+    <ScrollView showsVerticalScrollIndicator={false}>
     <View style={styles.mainContainer}>
           <View style={styles.containerSVG}>
             <SvgTop />
@@ -70,6 +71,7 @@ export default function LoginScreen( { navigation } ) {
             <StatusBar style="auto" />
           </View>
         </View>
+      </ScrollView>
   )
 }
 
