@@ -123,21 +123,6 @@ export const AuthProvider = ({children}) => {
             province
           }
         )
-        const { access_token } = resp.data.data
-        const { id } = resp.data.data
-        // console.log(resp.data.data.access_token)
-        console.log(access_token);
-        console.log(id);
-
-        const action = {
-          type: types.register,
-          payload: {
-            token: access_token,
-            user: id
-          }
-        }
-        dispatch(action)
-        await AsyncStorage.setItem('token', access_token)
 
       }catch(error){
         console.log(error)
