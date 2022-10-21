@@ -14,7 +14,6 @@ export const StackNavigator = () => {
 
   const { isAuthenticated } = useContext(AuthContext)
 
-  // TODO: se bugueea cuando expira el token y pasa mucho tiempo se queda cargando siempre pero con un token viejo, no se va nunca el estado de checking
   // if (isAuthenticated === 'checking') return <LoadingScreen />
   
   return (
@@ -32,6 +31,8 @@ export const StackNavigator = () => {
       }}
     >
 
+      {/* TODO: aca esta teniendo problemas, una de las alertas que tira que no encuentra el LoginScreen o el HomeLogged */}
+
       {
         ( !isAuthenticated )
         ? (
@@ -43,8 +44,10 @@ export const StackNavigator = () => {
 
         )
         : (
-
-          <Stack.Screen name="HomeLogged" options={{ title:"Welcome" }} component={ HomeLogged } />
+          <>
+            <Stack.Screen name="HomeLogged" options={{ title:"Welcome" }} component={ HomeLogged } />
+            <Stack.Screen name="DetailsScreen" component={ DetailsScreen } />
+          </>
 
         )
         }

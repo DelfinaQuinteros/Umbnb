@@ -1,4 +1,42 @@
 import { hola } from '../../assets/proof';
+import umbnbApi from '../api/umbnbApi';
+
+export const getHouses = async (page=0, size=5) => {
+  const resp = await umbnbApi.get(
+    `/house?page=${page}&size=${size}`
+  )
+  // console.log(resp.data.data.content)
+  const houses = resp.data.data.content
+
+  const results = []
+  
+    houses.map((house) => {
+      const home = {
+        id: house.id,
+        Owner: house.owner.name,
+        name: house.name,
+        address: house.address,
+        province: house.province,
+        rooms_number: house.roomsNumber,
+        persons_number: house.personsNumber,
+        image: require('../../assets/house1.jpeg'),
+        review: house.review,
+        price: house.price,
+        interiors: [
+          require('../../assets/interior1.jpeg'),
+          require('../../assets/interior2.jpeg'),
+          require('../../assets/interior3.jpeg'),
+        ]
+      }
+      results.push(home)
+
+    })
+
+    return results
+
+}
+
+
 
 const houses = [
     {

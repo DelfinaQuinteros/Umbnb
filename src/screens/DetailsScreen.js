@@ -7,7 +7,7 @@ import ButtonGradientRent from '../components/ButtonGradientRent';
 
 const {width} = Dimensions.get('screen');
 
-const DetailsScreen = ({navigation, route}) => {
+export const DetailsScreen = ({navigation, route}) => {
   const house = route.params;
 
   const InteriorCard = ({interior}) => {
@@ -40,24 +40,27 @@ const DetailsScreen = ({navigation, route}) => {
               {house.name}
             </Text>
             <View style={style.ratingTag}>
-              <Text style={{color: COLORS.white}}>4.8</Text>
+              <Text style={{color: COLORS.white}}>{house.review}.0</Text>
             </View>
           </View>
 
           {/* Location text */}
+          <Text style={{color: COLORS.grey, fontSize: 22, marginTop: 5}}>
+              Host: {house.Owner} 
+            </Text>
           <Text style={{fontSize: 22, color: COLORS.grey}}>
-            {house.address}
+            {house.address}, {house.province}  
           </Text>
 
           {/* Facilities container */}
           <View style={{flexDirection: 'row', marginTop: 15}}>
             <View style={style.facility}>
               <Icon name="hotel" size={22} />
-              <Text style={style.facilityText}>4</Text>
+              <Text style={style.facilityText}>{house.rooms_number}</Text>
             </View>
             <View style={style.facility}>
               <Fontisto name="male" size={22} />
-              <Text style={style.facilityText}>8</Text>
+              <Text style={style.facilityText}>{house.persons_number}</Text>
             </View>
           </View>
 
@@ -75,8 +78,8 @@ const DetailsScreen = ({navigation, route}) => {
           <View style={style.footer}>
             <View>
               <Text
-                style={{color: COLORS.blue, fontWeight: 'bold', fontSize: 26}}>
-                $1,500
+                style={{color: COLORS.blue, fontWeight: 'bold', fontSize: 22}}>
+                ${house.price}/night
               </Text>
               <Text
                 style={{fontSize: 18, color: COLORS.grey, fontWeight: 'bold'}}>
@@ -96,10 +99,10 @@ const DetailsScreen = ({navigation, route}) => {
 const style = StyleSheet.create({
   backgroundImageContainer: {
     elevation: 20,
-    marginHorizontal: 20,
-    marginTop: 20,
+    marginHorizontal: 10,
+    marginTop: 10,
     alignItems: 'center',
-    height: 350,
+    height: 320,
   },
   backgroundImage: {
     height: '100%',
@@ -168,4 +171,4 @@ const style = StyleSheet.create({
   facilityText: {marginLeft: 5, color: COLORS.grey, fontSize:18},
 });
 
-export default DetailsScreen;
+// export default DetailsScreen;
