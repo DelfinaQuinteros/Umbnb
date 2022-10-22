@@ -14,7 +14,7 @@
     "@react-native-masked-view/masked-view": "^0.2.7",
     "@react-native-segmented-control/segmented-control": "^2.4.0",
     "@react-navigation/native": "^6.0.12",
-    "@react-navigation/stack": "^6.2.3",
+    "@react-navigation/stack": "^6.3.2",
     "async-storage": "^0.1.0",
     "axios": "^0.27.2",
     "chalk": "^5.1.2",

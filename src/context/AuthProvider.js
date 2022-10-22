@@ -127,6 +127,7 @@ export const AuthProvider = ({children}) => {
             province
           }
         )
+<<<<<<< HEAD
         // const { access_token } = resp.data.data
         // const { id } = resp.data.data
         // console.log(resp.data.data.access_token)
@@ -142,6 +143,8 @@ export const AuthProvider = ({children}) => {
         // }
         // dispatch(action)
         // await AsyncStorage.setItem('token', access_token)
+=======
+>>>>>>> 8bbd5d2a509cf63675b3b578ddd123c3a96387a1
 
       }catch(error){
         console.log(error)
