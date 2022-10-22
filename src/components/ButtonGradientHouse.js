@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
     },
 
     text: {
-      fontSize: 14,
+      fontSize: 20,
       color: '#fff',
       fontWeight: 'bold',
     },
     button: {
-        width: '80%',
-        height: 50,
+        width: '90%',
+        height: 60,
         borderRadius: 25,
         padding: 10,
         alignItems: 'center',

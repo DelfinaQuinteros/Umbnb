@@ -88,6 +88,16 @@ export default function HomeLogged( { navigation } ) {
     navigation.navigate('LoginScreen')
   }
 
+
+  const CreateHouseBtn = () => {
+    return (
+      <Pressable
+      style={style.button}
+      onPress={() => navigation.navigate('CreateHouse')}>
+      <Text style={style.buttonText}>Create a house</Text>
+   </Pressable>
+    );
+  };
   const Card = ({house}) => {
     return (
       <Pressable
@@ -174,14 +184,21 @@ export default function HomeLogged( { navigation } ) {
             justifyContent: 'space-between',
             paddingHorizontal: 20,
           }}>
-          <View style={style.searchInputContainer}>
-            <Fontisto name="search" color={COLORS.grey} size={25} />
-            <TextInput placeholder="Search address, city, location" />
-          </View>
 
-          <View style={style.sortBtn}>
-            <Fontisto name="filter" color={COLORS.white} size={25} />
-          </View>
+            {
+                ( 1 == 1 )
+
+                ?
+                <View style={style.searchInputContainer}>
+                   <CreateHouseBtn />
+                </View>
+                : null
+            }
+
+            {/* <CreateHouseBtn /> */}
+
+
+          
         </View>
 
         {/* Render Card */}
