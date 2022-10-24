@@ -3,6 +3,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { StackNavigator } from './src/navigator/StackNavigator';
 import { AuthProvider } from './src/context/AuthProvider';
+import { HousesProvider } from './src/context/HousesContext';
 
 const App = () => {
 
@@ -26,7 +27,9 @@ const App = () => {
 const AppState = ( { children } ) => {
   return (
     <AuthProvider>
-      { children }
+      <HousesProvider> 
+        { children }
+      </HousesProvider>
     </AuthProvider>
   )
 }

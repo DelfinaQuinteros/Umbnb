@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function ButtonGradientRent () {
+export default function ButtonGradientRent ( {text} ) {
     return (
         <TouchableOpacity style={styles.container}>
             <LinearGradient
@@ -12,7 +12,7 @@ export default function ButtonGradientRent () {
                 end={{x: 1, y: 1}}    
                 style={styles.button}
             >
-                <Text style={styles.text}>Rent Now</Text>
+                <Text style={styles.text}>{text}</Text>
             </LinearGradient>
         </TouchableOpacity>
     );

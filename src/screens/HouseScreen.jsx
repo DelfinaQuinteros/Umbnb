@@ -7,7 +7,7 @@ import ButtonGradientRent from '../components/ButtonGradientRent';
 
 const {width} = Dimensions.get('screen');
 
-export const DetailsScreen = ({navigation, route}) => {
+export const HouseScreen = ( { navigation, route } ) => {
   const house = route.params;
 
   const InteriorCard = ({interior}) => {
@@ -20,7 +20,7 @@ export const DetailsScreen = ({navigation, route}) => {
         {/* House image */}
 
         <View style={style.backgroundImageContainer}>
-          <ImageBackground style={style.backgroundImage} source={house.image}>
+          <ImageBackground style={style.backgroundImage} source={require('../../assets/house1.jpeg')}>
             <View style={style.header}>
               <View style={style.headerBtn}>
                 <Icon
@@ -46,21 +46,21 @@ export const DetailsScreen = ({navigation, route}) => {
 
           {/* Location text */}
           <Text style={{color: COLORS.grey, fontSize: 22, marginTop: 5}}>
-              Host: {house.Owner} 
+              Host: {house.owner.name} {house.owner.lastname}
             </Text>
           <Text style={{fontSize: 22, color: COLORS.grey}}>
-            {house.address}, {house.province}  
+            {house.address}, {house.owner.province}  
           </Text>
 
           {/* Facilities container */}
           <View style={{flexDirection: 'row', marginTop: 15}}>
             <View style={style.facility}>
               <Icon name="hotel" size={22} />
-              <Text style={style.facilityText}>{house.rooms_number}</Text>
+              <Text style={style.facilityText}>{house.roomsNumber}</Text>
             </View>
             <View style={style.facility}>
               <Fontisto name="male" size={22} />
-              <Text style={style.facilityText}>{house.persons_number}</Text>
+              <Text style={style.facilityText}>{house.personsNumber}</Text>
             </View>
           </View>
 
@@ -69,7 +69,11 @@ export const DetailsScreen = ({navigation, route}) => {
             horizontal
             showsHorizontalScrollIndicator={false}
             keyExtractor={(_, key) => key.toString()}
-            data={house.interiors}
+            data={[
+                require('../../assets/interior1.jpeg'),
+                require('../../assets/interior2.jpeg'),
+                require('../../assets/interior3.jpeg'),
+            ]}
             renderItem={({item}) => <InteriorCard interior={item} />}
           />
 

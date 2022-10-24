@@ -22,7 +22,8 @@ export default function LoginScreen( { navigation } ) {
 
         login({ email, password })
 
-        navigation.navigate('HomeLogged')
+        // navigation.navigate('HomeLogged')
+        navigation.navigate('HousesScreen')
     }
 
   return (

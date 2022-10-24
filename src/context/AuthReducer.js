@@ -8,14 +8,16 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 isAuthenticated: true,
                 user: action.payload.user,
-                token: action.payload.token
+                token: action.payload.token,
+                host: action.payload.host
             }
         case types.logout:
             return {
                 ...state,
                 isAuthenticated: false,
                 token: null,
-                user: null
+                user: null,
+                host: null
             }
         default:
             return state

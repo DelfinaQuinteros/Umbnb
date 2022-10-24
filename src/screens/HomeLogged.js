@@ -1,46 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import DetailsScreen from './DetailsScreen';
-// import { Alert, Button, Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
 import { SafeAreaView, View, StatusBar, Text,TextInput, FlatList, Dimensions, StyleSheet, Image, Pressable, ScrollView, Button, } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
-// import { stylesApp } from '../theme/AppStyles';
 import { hola } from '../../assets/proof';
 import COLORS from '../components/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Fontisto } from "@expo/vector-icons";
 import umbnbApi from '../api/umbnbApi';
-// import { getHouses } from '../components/houses';
+import ButtonGradientRent from '../components/ButtonGradientRent';
 
 const { width } = Dimensions.get('screen');
-
-
-
-// console.log(getHouses())
-
-// const obtenerCasas = async () => {
-//   const casas = await getHouses()
-//   return casas
-// }
-// const houses = []
-
-// getHouses().then((casas) => {
-//   var houses = casas
-// })
-
-// console.log(obtenerCasas())
-// const houses = []
-
-
 
 export default function HomeLogged( { navigation } ) {
 
   const [listaCasas, setListaCasas] = useState([])
+  // const [results, setresults] = useState([])
 
   useEffect(() => {
     getHouses()
-    // navigation.setOptions({
-    //   headerBackTitle: "Back"
-    // })
   }, [])
 
   const getHouses = async (page=0, size=5) => {
@@ -52,7 +29,7 @@ export default function HomeLogged( { navigation } ) {
   
     const results = []
     
-      houses.map((house) => {
+      await houses.map((house) => {
         const home = {
           id: house.id,
           Owner: house.owner.name,
@@ -70,16 +47,18 @@ export default function HomeLogged( { navigation } ) {
             require('../../assets/interior3.jpeg'),
           ]
         }
-        console.log(home)
+        // console.log(home)
         results.push(home)
+
+        // setresults(results => [...results, home])
+        // setListaCasas(...listaCasas, home)
   
       })
       // console.log(results)
-      setListaCasas(results)
-  
+      setListaCasas(...listaCasas ,results)
   }
 
-  const { token, user, logout } = useContext(AuthContext)
+  const { token, user, logout, host } = useContext(AuthContext)
 
   const onLogout = () => {
 
@@ -88,7 +67,6 @@ export default function HomeLogged( { navigation } ) {
     navigation.navigate('LoginScreen')
   }
 
-
   const CreateHouseBtn = () => {
     return (
       <Pressable
@@ -96,8 +74,9 @@ export default function HomeLogged( { navigation } ) {
       onPress={() => navigation.navigate('CreateHouse')}>
       <Text style={style.buttonText}>Create a house</Text>
    </Pressable>
-    );
-  };
+    )
+  }
+
   const Card = ({house}) => {
     return (
       <Pressable
@@ -186,19 +165,13 @@ export default function HomeLogged( { navigation } ) {
           }}>
 
             {
-                ( 1 == 1 )
-
-                ?
+                ( host == true )
+                &&
                 <View style={style.searchInputContainer}>
                    <CreateHouseBtn />
                 </View>
-                : null
             }
 
-            {/* <CreateHouseBtn /> */}
-
-
-          
         </View>
 
         {/* Render Card */}
@@ -291,6 +264,9 @@ const style = StyleSheet.create({
     marginRight: 20,
     padding: 15,
     borderRadius: 20,
+  },
+  btnCreate: {
+    backgroundColor: COLORS.dark,
   },
   cardImage: {
     width: '100%',

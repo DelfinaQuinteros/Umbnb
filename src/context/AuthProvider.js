@@ -29,6 +29,7 @@ export const AuthProvider = ({children}) => {
     const validateToken = async () => {
 
       const token = await AsyncStorage.getItem('token')
+      // const host = await AsyncStorage.getItem('host')
 
       // Si no esta el token o esta expirado entonces se hace logout automaticamente
       if ( !token ) return dispatch({ type: types.logout })
@@ -48,13 +49,20 @@ export const AuthProvider = ({children}) => {
       // console.log(data)
       const { access_token } = data.data
       const { id } = data.data
+
+      const userData = await umbnbApi.get(
+        `/user/${id}`
+      )
+
+      const { host } = userData.data
       
       // console.log("Token valid")
       const action = {
         type: types.login,
         payload: {
           token: access_token,
-          user: id
+          user: id,
+          host: host
         }
       }
       dispatch(action)
@@ -79,18 +87,27 @@ export const AuthProvider = ({children}) => {
           const { access_token } = resp.data.data
           const { id } = resp.data.data
           // console.log(resp.data.data.access_token)
-          console.log(access_token);
-          console.log(id);
+          // console.log(access_token);
+          // console.log(id);
+
+          const userData = await umbnbApi.get(
+            `/user/${id}`
+          )
+
+          const { host } = userData.data
+          // console.log(host)
 
           const action = {
             type: types.login,
             payload: {
               token: access_token,
-              user: id
+              user: id,
+              host: host
             }
           }
           dispatch(action)
           await AsyncStorage.setItem('token', access_token)
+          // await AsyncStorage.setItem('host', host)
 
         }catch(error){
           console.log(error)
@@ -127,24 +144,6 @@ export const AuthProvider = ({children}) => {
             province
           }
         )
-<<<<<<< HEAD
-        // const { access_token } = resp.data.data
-        // const { id } = resp.data.data
-        // console.log(resp.data.data.access_token)
-        // console.log(access_token);
-        // console.log(id);
-
-        // const action = {
-        //   type: types.register,
-        //   payload: {
-        //     token: access_token,
-        //     user: id
-        //   }
-        // }
-        // dispatch(action)
-        // await AsyncStorage.setItem('token', access_token)
-=======
->>>>>>> 8bbd5d2a509cf63675b3b578ddd123c3a96387a1
 
       }catch(error){
         console.log(error)

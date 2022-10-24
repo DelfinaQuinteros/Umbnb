@@ -7,6 +7,7 @@ import {DetailsScreen} from '../screens/DetailsScreen';
 import {CreateHouse} from '../screens/CreateHouse';
 import { AuthContext } from '../context/AuthContext';
 import { LoadingScreen } from '../screens/LoadingScreen';
+import { HousesNavigator } from './HousesNavigator';
 
 const Stack = createStackNavigator();
 
@@ -38,23 +39,22 @@ export const StackNavigator = () => {
         ? (
 
           <>
-          <Stack.Screen name="LoginScreen" options={{title:"LoginScreen"}} component={LoginScreen} />
-          <Stack.Screen name="RegisterScreen" options={{ title:"Register" }} component={ RegisterScreen } />
+            <Stack.Screen name="LoginScreen" options={{title:"LoginScreen"}} component={LoginScreen} />
+            <Stack.Screen name="RegisterScreen" options={{ title:"Register" }} component={ RegisterScreen } />
           </>
 
         )
         : (
           <>
-            <Stack.Screen name="HomeLogged" options={{ title:"Welcome" }} component={ HomeLogged } />
-            <Stack.Screen name="DetailsScreen" component={ DetailsScreen } />
+            {/* <Stack.Screen name="HomeLogged" options={{ title:"Welcome" }} component={ HomeLogged } /> */}
+            {/* <Stack.Screen name="DetailsScreen" component={ DetailsScreen } /> */}
+            <Stack.Screen name="HousesNavigator" component={ HousesNavigator } />
             <Stack.Screen name="CreateHouse" component={ CreateHouse } />
+
           </>
 
         )
         }
-      {/* <Stack.Screen name="LoginScreen" options={{ title:"Login" }} component={ LoginScreen } />
-      <Stack.Screen name="RegisterScreen" options={{ title:"Register" }} component={ RegisterScreen } />
-      <Stack.Screen name="HomeLogged" options={{ title:"Welcome" }} component={ HomeLogged } /> */}
 
     </Stack.Navigator>
   );
