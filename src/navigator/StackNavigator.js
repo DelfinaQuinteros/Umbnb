@@ -8,6 +8,7 @@ import { LoadingScreen } from '../screens/LoadingScreen';
 import { HousesNavigator } from './HousesNavigator';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { RentalsScreen } from '../screens/RentalsScreen';
+import { HostHouses } from '../screens/HostHouses';
 
 const Stack = createStackNavigator();
 
@@ -50,6 +51,7 @@ export const StackNavigator = () => {
             <Stack.Screen name="CreateHouse" component={ CreateHouse } />
             <Stack.Screen name="Rentals" component={ RentalsScreen } />
             <Stack.Screen name="Profile" component={ ProfileScreen } />
+            <Stack.Screen name="HostHouses" component={HostHouses} />
           </>
 
         )

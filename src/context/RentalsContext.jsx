@@ -40,6 +40,18 @@ export const RentalsProvider = ({ children }) => {
         Alert.alert('Rental created!')
     }
 
+    const deleteRental = async ( rentailId ) => {
+        // console.log('entra a deleteRental', rentailId)
+        try {
+            const resp = await umbnbApi.delete(`/rental/delete-rental/${rentailId}`)
+            console.log(resp.status, 'STATUS CODE')
+            Alert.alert('Rental deleted!')
+        }catch(e){
+            console.log(e, 'error')
+        }
+        loadRentals(user)
+    }
+
 
     const loadRentals = async (user) => {
 
@@ -48,11 +60,12 @@ export const RentalsProvider = ({ children }) => {
             const resp = await umbnbApi.get(`/rental/${user}`)
     
             const content = resp.data
-            const houses = content.map((rental) => {
-                return rental.house
-            })
+            // const houses = content.map((rental) => {
+            //     return rental.house
+            // })
         
-            setRentals([ ...houses ])
+            // setRentals([ ...houses ])
+            setRentals([ ...content ])
         }catch(e){
             console.log('error', e)
         }
@@ -61,7 +74,8 @@ export const RentalsProvider = ({ children }) => {
     return (
         <RentalsContext.Provider value={{
             addRental,
-            rentals
+            rentals,
+            deleteRental,
         }}>
             {children}
         </RentalsContext.Provider>

@@ -9,16 +9,17 @@ import { Fontisto } from "@expo/vector-icons";
 import { RentalsContext } from '../context/RentalsContext'
 import { ProfilesContext } from '../context/ProfilesContext'
 import { AuthContext } from '../context/AuthContext'
+import { HousesContext } from '../context/HousesContext'
 
 const { width } = Dimensions.get('screen');
 
-export const RentalsScreen = ( { navigation } ) => {
+export const HostHouses = ( { navigation } ) => {
 
-    const { rentals, deleteRental } = useContext(RentalsContext)
+    const { rentals, loadRentals } = useContext(RentalsContext)
+    // console.log(rentals, 'rentals')
     
-    // const houses = rentals.map((rental) => {
-    //   return rental.house
-    // })
+    const { housesHost } = useContext(HousesContext)
+    // console.log(housesHost, 'housesHost')
     
     const { profile, loadProfile } = useContext(ProfilesContext)
 
@@ -30,7 +31,7 @@ export const RentalsScreen = ( { navigation } ) => {
     
 
       // TODO: este component CARD se puede exportar a una carpeta components
-      const Card = ({rental}) => {
+      const Card = ({house}) => {
         // console.log(item, 'House from Card')
         return (
             <View style={style.card}>
@@ -45,37 +46,37 @@ export const RentalsScreen = ( { navigation } ) => {
                     marginTop: 10,
                   }}>
                   <Text style={{fontSize: 16, fontWeight: 'bold'}}>
-                    {rental.house.name}
+                    {house.name}
                   </Text>
                   <Text
                     style={{fontWeight: 'bold', color: COLORS.blue, fontSize: 16}}>
-                    ${rental.house.price}/night
+                    ${house.price}/night
                   </Text>
                 </View>
     
                 {/* Location text */}
                 <Text style={{color: COLORS.grey, fontSize: 14, marginTop: 5}}>
-                  Host: {rental.house.owner.name + ' ' + rental.house.owner.lastname} 
+                  Host: {house.owner.name + ' ' + house.owner.lastname} 
                 </Text>
                 <Text style={{color: COLORS.grey, fontSize: 14, marginTop: 5}}>
-                  {rental.house.address}, {rental.house.owner.province}  
+                  {house.address}, {house.owner.province}  
                 </Text>
     
                 {/* Facilities container */}
                 <View style={{marginTop: 10, flexDirection: 'row'}}>
                   <View style={style.facility}>
                     <Fontisto name="room" size={18} />
-                    <Text style={style.facilityText}>{rental.house.roomsNumber}</Text>
+                    <Text style={style.facilityText}>{house.roomsNumber}</Text>
                   </View>
                   <View style={style.facility}>
                     <Fontisto name="male" size={18} />
-                    <Text style={style.facilityText}>{rental.house.personsNumber}</Text>
+                    <Text style={style.facilityText}>{house.personsNumber}</Text>
                   </View>
                   <Pressable 
                     style={style.btnCancel}
-                    onPress={ () => deleteRental(rental.id) }
+                    onPress={() => console.log('hola')}
                   >
-                    <Text>Cancel rental</Text>
+                    <Text>Delete house</Text>
                   </Pressable>
     
                 </View>
@@ -94,14 +95,14 @@ export const RentalsScreen = ( { navigation } ) => {
     />
     {/* Header container */}
     <View style={style.header}>
-      <Pressable
+      {/* <Pressable
         onPress={() => navigation.navigate('Profile')}
       >
         <Image
             style={style.profileImage}
             source={require('../../assets/person.jpeg')}
         />
-      </Pressable>
+      </Pressable> */}
       <Text style={{fontSize: 20, fontWeight: 'bold', marginLeft: 10}}>
         {profile.name + ' ' + profile.lastname}
       </Text>
@@ -109,13 +110,13 @@ export const RentalsScreen = ( { navigation } ) => {
     <ScrollView showsVerticalScrollIndicator={false}>
       {/* Render Card */}
       <Text style={{fontSize: 20, fontWeight: 'bold', marginHorizontal: 20}}>
-        My Rentals (total: {rentals.length})
+        My Houses (total: {housesHost.length})
       </Text>
       <FlatList
         snapToInterval={width - 20}
         contentContainerStyle={{paddingLeft: 20, paddingVertical: 20}}
-        data={ rentals } // TODO: pasarle el array de houses
-        renderItem={ ({item}) => <Card rental={item} />}
+        data={ housesHost } // TODO: pasarle el array de houses
+        renderItem={ ({item}) => <Card house={item} />}
       />
 
         </ScrollView>

@@ -115,13 +115,14 @@ export default function RegisterScreen( { navigation } ) {
             <SwitchSelector
                 style={styles.containerSex}
                 initial={0}
-                // onPress={value => this.setState({ gender: value })}
+                onPress={ value => onInputChange(value, 'sex') }
                 textColor= "#1F2937"
                 selectedColor= "#1F2937"
                 buttonColor="#FF3CBD"
                 borderColor="#f472b6"
                 width={2000}
                 hasPadding
+                onSubmitEditing={ onRegister }
                 options={[
                     { label: "Mujer", value: 0, customIcon: <Fontisto name="female" size={20} /> },
                     { label: "Hombre", value: 1, customIcon: <Fontisto name="male" size={20} /> },

@@ -6,7 +6,7 @@ import { useForm } from '../hook/useForm';
 import ButtonGradientLogin from '../components/ButtonGradientLogin';
 import { SvgTop } from '../utils/SvgTop';
 
-const { width } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 export default function LoginScreen( { navigation } ) {
 
@@ -25,7 +25,9 @@ export default function LoginScreen( { navigation } ) {
     }
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView 
+      showsVerticalScrollIndicator={false}
+    >
     <View style={styles.mainContainer}>
           <View style={styles.containerSVG}>
             <SvgTop />
@@ -78,12 +80,14 @@ export default function LoginScreen( { navigation } ) {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: '#f1f1f1',
+    backgroundColor: '#f8f8f8',
     flex: 1,
+    height: height,
   },
   container: {
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   containerSVG: {
     width: width,
