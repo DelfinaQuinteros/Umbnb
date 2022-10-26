@@ -6,7 +6,7 @@ import { SvgTop } from '../utils/SvgTop';
 
 const { width } = Dimensions.get('window')
 
-export const App = ( { navigation } ) => {
+export const ProfileScreen = ( { navigation } ) => {
 
     const { profile, loadProfile } = useContext(ProfilesContext)
 
