@@ -74,7 +74,6 @@ export default function LoginScreen( { navigation } ) {
   )
 }
 
-// const styles = stylesApp;
 
 const styles = StyleSheet.create({
   mainContainer: {

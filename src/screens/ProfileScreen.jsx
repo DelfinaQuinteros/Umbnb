@@ -1,9 +1,12 @@
 import React, { useContext, useEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import { AuthContext } from '../context/AuthContext'
 import { ProfilesContext } from '../context/ProfilesContext'
+import { SvgTop } from '../utils/SvgTop';
 
-export const ProfileScreen = ( { navigation } ) => {
+const { width } = Dimensions.get('window')
+
+export const App = ( { navigation } ) => {
 
     const { profile, loadProfile } = useContext(ProfilesContext)
 
@@ -16,38 +19,57 @@ export const ProfileScreen = ( { navigation } ) => {
     }, [])
 
   return (
-    <View
-        style={style.container}
-    >
-        <Text style={{fontSize: 40, fontWeight: 'bold'}}>
+    <View style={styles.mainContainer}>
+        <View style={styles.containerSVG}>
+            <SvgTop />
+          </View>
+          <View style={styles.container}>  
+        <Text style={styles.titulo}>
             {profile.name} {profile.lastname}
         </Text>
-        <Text >
+        <Text style={styles.subTitle}>
             Email: {profile.email}
         </Text>
-        <Text >
+        <Text style={styles.subTitle}>
             Edad: {profile.age}
         </Text>
-        <Text >
+        <Text style={styles.subTitle}>
             Provincia: {profile.province}
         </Text>
-        <Text >
+        <Text style={styles.subTitle}>
             Telfono: {profile.phoneNumber}
         </Text>
-        <Text>
+        <Text style={styles.subTitle}>
             Sexo: {profile.sex ? 'Masculino' : 'Femenino'}
         </Text>
-        <Text>
+        <Text style={styles.subTitle}>
             Host: {profile.host ? 'Si' : 'No'}
         </Text>
+        </View>
     </View>
   )
 }
-
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
+    mainContainer: {
+      backgroundColor: '#f1f1f1',
+      flex: 1,
+    },
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-})
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    containerSVG: {
+      width: width,
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    },
+    titulo: {
+      fontSize: 80,
+      color: '#203545',
+      fontWeight: 'bold',
+    },
+    subTitle: {
+      fontSize: 20,
+      color: 'gray',
+    },
+  });
