@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StackNavigator } from './src/navigator/StackNavigator';
 import { AuthProvider } from './src/context/AuthProvider';
 import { HousesProvider } from './src/context/HousesContext';
+import { RentalsProvider } from './src/context/RentalsContext';
+import { ProfilesProvider } from './src/context/ProfilesContext';
 
 const App = () => {
 
@@ -27,9 +29,15 @@ const App = () => {
 const AppState = ( { children } ) => {
   return (
     <AuthProvider>
-      <HousesProvider> 
-        { children }
-      </HousesProvider>
+      <ProfilesProvider>
+
+        <HousesProvider> 
+          <RentalsProvider>
+            { children }
+          </RentalsProvider>
+        </HousesProvider>
+
+      </ProfilesProvider>
     </AuthProvider>
   )
 }

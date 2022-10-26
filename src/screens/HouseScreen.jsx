@@ -1,18 +1,27 @@
-import React from 'react';
-import {  ImageBackground, SafeAreaView, View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView} from 'react-native';
+import React, { useContext } from 'react';
+import {  ImageBackground, SafeAreaView, View, Text, StyleSheet, FlatList, Image, Dimensions, ScrollView, Alert} from 'react-native';
 import { Fontisto } from "@expo/vector-icons";
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../components/colors';
 import ButtonGradientRent from '../components/ButtonGradientRent';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import { RentalsContext } from '../context/RentalsContext';
+import { AuthContext } from '../context/AuthContext';
 
 const {width} = Dimensions.get('screen');
 
 export const HouseScreen = ( { navigation, route } ) => {
   const house = route.params;
 
+  const { addRental } = useContext(RentalsContext)
+  const { user } = useContext(AuthContext)
+
   const InteriorCard = ({interior}) => {
     return <Image source={interior} style={style.interiorImage} />;
   };
+
+  const onRentHouse = () => {
+    Alert.alert('House rented!')
+  }
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
@@ -23,8 +32,8 @@ export const HouseScreen = ( { navigation, route } ) => {
           <ImageBackground style={style.backgroundImage} source={require('../../assets/house1.jpeg')}>
             <View style={style.header}>
               <View style={style.headerBtn}>
-                <Icon
-                  name="arrow-back-ios"
+                <Fontisto
+                  name="angle-dobule-left"
                   size={20}
                   onPress={navigation.goBack}
                 />
@@ -55,7 +64,7 @@ export const HouseScreen = ( { navigation, route } ) => {
           {/* Facilities container */}
           <View style={{flexDirection: 'row', marginTop: 15}}>
             <View style={style.facility}>
-              <Icon name="hotel" size={22} />
+              <Fontisto name="room" size={22} />
               <Text style={style.facilityText}>{house.roomsNumber}</Text>
             </View>
             <View style={style.facility}>
@@ -91,7 +100,25 @@ export const HouseScreen = ( { navigation, route } ) => {
               </Text>
             </View>
             <View style={style.bookNowBtn}>
-              <ButtonGradientRent text='Rent now'/>
+                <Pressable
+                    style={style.btnRent}
+                    onPress={ () => addRental({
+                        client: {
+                            id: user
+                        },
+                        host: {
+                            id: house.owner.id
+                        },
+                        house: {
+                            id: house.id
+                        },
+                        date: new Date(),
+                        price: house.price
+                    }, house) 
+                    }
+                >
+                    <Text style={style.buttonText}>Rent now</Text>
+                </Pressable>
             </View>
           </View>
         </View>
@@ -114,6 +141,19 @@ const style = StyleSheet.create({
     borderRadius: 20,
     overflow: 'hidden',
   },
+  btnRent: {
+    backgroundColor: '#FF385C',
+    height: 60,
+    width: 150, 
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+  },
+    buttonText: {
+        fontSize: 20,
+        color: '#fff',
+    },
   header: {
     paddingVertical: 20,
     flexDirection: 'row',
@@ -164,7 +204,7 @@ const style = StyleSheet.create({
   },
   bookNowBtn: {
     height: 260,
-    width: 150, 
+    width: 250, 
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,

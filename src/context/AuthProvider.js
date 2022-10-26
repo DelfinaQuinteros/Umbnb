@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useReducer } from 'react'
 import umbnbApi from '../api/umbnbApi'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -7,6 +7,8 @@ import { types } from '../types/types'
 import { AuthContext } from './AuthContext'
 import { authReducer } from './AuthReducer'
 import { Alert } from 'react-native';
+import { ProfilesContext } from './ProfilesContext';
+import { HousesContext } from './HousesContext';
 
 const initialState = {
     // Esto es para comprobar que si se esta checkeando se muestra el loading
@@ -23,13 +25,13 @@ export const AuthProvider = ({children}) => {
     useEffect(() => {
       
       validateToken()
+      // loadProfile(id)
   
     }, [])
 
     const validateToken = async () => {
 
       const token = await AsyncStorage.getItem('token')
-      // const host = await AsyncStorage.getItem('host')
 
       // Si no esta el token o esta expirado entonces se hace logout automaticamente
       if ( !token ) return dispatch({ type: types.logout })
@@ -42,11 +44,10 @@ export const AuthProvider = ({children}) => {
       if (message != 'Token succesfully verified') {
         
         // Si el token no lo verifica, es decir que ya expiro, deberia hacer un logout automatico
-        // return dispatch({ type: types.logout })
-        return logout()
+        return dispatch({ type: types.logout })
+        // return logout()
       }
 
-      // console.log(data)
       const { access_token } = data.data
       const { id } = data.data
 
@@ -54,18 +55,24 @@ export const AuthProvider = ({children}) => {
         `/user/${id}`
       )
 
-      const { host } = userData.data
+      const user = userData.data
       
-      // console.log("Token valid")
       const action = {
         type: types.login,
         payload: {
           token: access_token,
           user: id,
-          host: host
+          host: user.host,
+          userData: user
         }
       }
-      dispatch(action)
+      try{
+        dispatch(action)
+      }catch{
+        console.log('error')
+      }
+
+      // loadProfile(id)
 
     }
     
@@ -84,30 +91,29 @@ export const AuthProvider = ({children}) => {
               password
             }
           )
+
           const { access_token } = resp.data.data
           const { id } = resp.data.data
-          // console.log(resp.data.data.access_token)
-          // console.log(access_token);
-          // console.log(id);
+
 
           const userData = await umbnbApi.get(
             `/user/${id}`
           )
 
-          const { host } = userData.data
-          // console.log(host)
+          const user = userData.data
 
           const action = {
             type: types.login,
             payload: {
               token: access_token,
               user: id,
-              host: host
+              host: user.host,
+              // host: false,
+              userData: user
             }
           }
           dispatch(action)
           await AsyncStorage.setItem('token', access_token)
-          // await AsyncStorage.setItem('host', host)
 
         }catch(error){
           console.log(error)

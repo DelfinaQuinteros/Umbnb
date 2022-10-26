@@ -10,6 +10,7 @@ export const HousesProvider = ({ children }) => {
 
     useEffect(() => {
 
+        // TODO: se le puede agregar un try para que no trate de cargar las casas hasta que el usuario no este logueado ya que necesita el token para traer las casas
         loadHouses()
 
     }, [])
@@ -20,7 +21,6 @@ export const HousesProvider = ({ children }) => {
         const resp = await umbnbApi.get('/house?page=0&size=5')
     
         const content = resp.data.data.content
-        // console.log(content)
     
         setHouses([ ...content ])
     }

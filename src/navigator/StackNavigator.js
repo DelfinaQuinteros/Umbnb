@@ -2,12 +2,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import React, { useContext } from 'react';
-import HomeLogged from '../screens/HomeLogged';
-import {DetailsScreen} from '../screens/DetailsScreen';
 import {CreateHouse} from '../screens/CreateHouse';
 import { AuthContext } from '../context/AuthContext';
 import { LoadingScreen } from '../screens/LoadingScreen';
 import { HousesNavigator } from './HousesNavigator';
+import { ProfileScreen } from '../screens/ProfileScreen';
+import { RentalsScreen } from '../screens/RentalsScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,7 +15,7 @@ export const StackNavigator = () => {
 
   const { isAuthenticated } = useContext(AuthContext)
 
-  // if (isAuthenticated === 'checking') return <LoadingScreen />
+  if (isAuthenticated === 'checking') return <LoadingScreen />
   
   return (
     <Stack.Navigator
@@ -46,11 +46,10 @@ export const StackNavigator = () => {
         )
         : (
           <>
-            {/* <Stack.Screen name="HomeLogged" options={{ title:"Welcome" }} component={ HomeLogged } /> */}
-            {/* <Stack.Screen name="DetailsScreen" component={ DetailsScreen } /> */}
             <Stack.Screen name="HousesNavigator" component={ HousesNavigator } />
             <Stack.Screen name="CreateHouse" component={ CreateHouse } />
-
+            <Stack.Screen name="Rentals" component={ RentalsScreen } />
+            <Stack.Screen name="Profile" component={ ProfileScreen } />
           </>
 
         )

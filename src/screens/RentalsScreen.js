@@ -5,35 +5,30 @@ import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable'
 import COLORS from '../components/colors';
-import { AuthContext } from '../context/AuthContext'
-import { HousesContext } from '../context/HousesContext'
 import { Fontisto } from "@expo/vector-icons";
+import { RentalsContext } from '../context/RentalsContext'
 import { ProfilesContext } from '../context/ProfilesContext'
+import { AuthContext } from '../context/AuthContext'
 
 const { width } = Dimensions.get('screen');
 
-export const HousesScreen = ( { navigation } ) => {
+export const RentalsScreen = ( { navigation } ) => {
 
-    const { houses, loadHouses } = useContext(HousesContext)
-
-    // TODO: pull to refresh
-
-    const { logout, host } = useContext(AuthContext)
-
-    const onLogout = () => {
-  
-      logout()
-  
-      navigation.navigate('LoginScreen')
-    }
-
+    const { rentals, loadRentals } = useContext(RentalsContext) 
     
+    const { profile, loadProfile } = useContext(ProfilesContext)
+
+    const { user } = useContext(AuthContext)
+
+    useEffect(() => {
+        loadProfile(user)
+    }, [user])
+    
+
       // TODO: este component CARD se puede exportar a una carpeta components
       const Card = ({house}) => {
+        // console.log(item, 'House from Card')
         return (
-          <Pressable
-            activeOpacity={0.8}
-            onPress={() => navigation.navigate('HouseScreen', house)}>
             <View style={style.card}>
               {/* House image */}
               <Image source={require('../../assets/house1.jpeg')} style={style.cardImage} />
@@ -72,11 +67,16 @@ export const HousesScreen = ( { navigation } ) => {
                     <Fontisto name="male" size={18} />
                     <Text style={style.facilityText}>{house.personsNumber}</Text>
                   </View>
+                  <Pressable 
+                    style={style.btnCancel}
+                    onPress={() => console.log('hola')}
+                  >
+                    <Text>Cancel rental</Text>
+                  </Pressable>
     
                 </View>
               </View>
             </View>
-          </Pressable>
         );
       };
 
@@ -90,22 +90,6 @@ export const HousesScreen = ( { navigation } ) => {
     />
     {/* Header container */}
     <View style={style.header}>
-      <View style={{
-          paddingVertical: 10,
-          justifyContent: 'space-between',
-          paddingHorizontal: 10,
-        }}>
-      <Button
-        title="Logout"
-        onPress={ onLogout }
-        color="black"
-      />
-      <Button
-        title="Rentas"
-        onPress={() => navigation.navigate('Rentals')}
-        color="black"
-      />
-      </View>
       <Pressable
         onPress={() => navigation.navigate('Profile')}
       >
@@ -114,40 +98,20 @@ export const HousesScreen = ( { navigation } ) => {
             source={require('../../assets/person.jpeg')}
         />
       </Pressable>
+      <Text style={{fontSize: 20, fontWeight: 'bold', marginLeft: 10}}>
+        {profile.name + ' ' + profile.lastname}
+      </Text>
     </View>
     <ScrollView showsVerticalScrollIndicator={false}>
-      {/* Input and sort button container */}
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingHorizontal: 20,
-        }}>
-
-          {
-              ( host == true )
-              &&
-              <Pressable 
-                style={style.btnCreateHouse}
-                onPress={() => navigation.navigate('CreateHouse')}
-              >
-                <Text style={style.buttonText}>+ Create a new house to rent</Text>
-              </Pressable>
-          }
-
-      </View>
-
       {/* Render Card */}
+      <Text style={{fontSize: 20, fontWeight: 'bold', marginHorizontal: 20}}>
+        My Rentals (total: {rentals.length})
+      </Text>
       <FlatList
         snapToInterval={width - 20}
         contentContainerStyle={{paddingLeft: 20, paddingVertical: 20}}
-        data={ houses } // TODO: pasarle el array de houses
+        data={ rentals } // TODO: pasarle el array de houses
         renderItem={ ({item}) => <Card house={item} />}
-        // keyExtractor={(h) => h.id}
-        // renderItem={ ({item}) => 
-        //     <Text style={{fontSize: 20}}>{item.name}</Text>
-        // }
-        // keyExtractor={(item) => item.id}
       />
 
         </ScrollView>
@@ -167,6 +131,12 @@ const style = StyleSheet.create({
     buttonText: {
         fontSize: 20,
         color: 'white',
+    },
+    btnCancel: {
+      backgroundColor: '#e1e1e1',
+      padding: 10,
+      borderRadius: 10,
+      marginLeft: 130,
     },
     profileImage: {
       height: 50,

@@ -15,14 +15,12 @@ export default function LoginScreen( { navigation } ) {
         password: ''
     })
 
-    // console.log(props);
     const { login } = useContext(AuthContext)
 
-    const onLogin = () => {
+    const onLogin = async () => {
 
         login({ email, password })
 
-        // navigation.navigate('HomeLogged')
         navigation.navigate('HousesScreen')
     }
 
